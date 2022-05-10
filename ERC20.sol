@@ -45,6 +45,7 @@ contract ERC20 is IERC20 {
         require(amount != 0);
         require(_allowances[msg.sender][recepient] == amount);
         _transfer(msg.sender, recepient, amount);
+        return true;
 
     }
 
@@ -55,6 +56,7 @@ contract ERC20 is IERC20 {
         require(_allowances[msg.sender][recepient] == amount);
 
         _transfer(from, recepient, amount);
+        return true;
 
     }
 
