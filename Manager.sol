@@ -2,6 +2,8 @@
 
 pragma solidity ^0.8.7;
 
-contract Manager {
+import "./MyNFT.sol";
+
+contract Manager is MyNFT {
     
 }
