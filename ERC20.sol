@@ -2,25 +2,31 @@
 
 pragma solidity ^0.8.7;
 
-contract ERC20 {
+import "./IERC20.sol";
+
+contract ERC20 is IERC20 {
 
 
     mapping(address=>uint) private _balances;
     mapping(address=>mapping(address=>uint)) private _allowances;
 
-    string constant nameERC20 = "TOKENS";
-    string constant symbolERC20 = "ERC20";
-    uint8 decimals = 8;
+    string private nameERC20;
+    string private symbolERC20;
+    uint8 decimals = 18;
 
     uint256 private _totalSupply;
-    uint256 public tokenPrice = 0.0001 ether;
 
-    function balanceOfERC20 (address owner)public view returns(uint256){
-
-        return _balances[owner];
+    constructor(string memory name_, string memory symbol_) {
+        nameERC20 = name_;
+        symbolERC20 = symbol_;
     }
 
-    function totalSupply () public view returns(uint256){
+    function balanceOf (address owner)public view override returns(uint256){
+
+        return _balances[owner];
+    } 
+
+    function totalSupply () public view override returns(uint256){
 
         return _totalSupply;
     }
@@ -33,7 +39,7 @@ contract ERC20 {
 
     }
 
-    function transfer (address recepient , uint256 amount) public {
+    function transfer (address recepient , uint256 amount) public override returns(bool) {
 
         require(recepient != address(0));
         require(amount != 0);
@@ -42,7 +48,7 @@ contract ERC20 {
 
     }
 
-    function transferFrom ( address from ,address recepient , uint256 amount) public {
+    function transferFrom ( address from ,address recepient , uint256 amount) public override returns(bool) {
 
         require(recepient != address(0) && from != address(0));
         require(amount != 0);
@@ -52,13 +58,13 @@ contract ERC20 {
 
     }
 
-    function approve (address from , address recepient , uint amount) public returns (bool success) {
+    function approve (address recepient , uint amount) public override returns (bool success) {
 
-        _allowances[from][recepient] += amount;
+        _allowances[msg.sender][recepient] += amount;
         return true;
     }
 
-    function allowance (address from , address recepient) public view returns (uint256) {
+    function allowance (address from , address recepient) public view override returns (uint256) {
 
         return _allowances[from][recepient];
     }
