@@ -1,19 +1,28 @@
-const { expect } = require("chai");
-const { ethers } = require("hardhat");
+const {expect} = require("chai");
+const {ethers} = require("hardhat");
 
-describe("Greeter", function () {
-  it("Should return the new greeting once it's changed", async function () {
-    const Greeter = await ethers.getContractFactory("Greeter");
-    const greeter = await Greeter.deploy("Hello, world!");
-    await greeter.deployed();
+describe("TokenForPay" , function () {
 
-    expect(await greeter.greet()).to.equal("Hello, world!");
+let owner;
+let acc2 , acc3;
+let lottery;
 
-    const setGreetingTx = await greeter.setGreeting("Hola, mundo!");
+ before(async function () {
 
-    // wait until the transaction is mined
-    await setGreetingTx.wait();
+    [owner , acc2 , acc3] = await ethers.getSigners();
+    const TokenForPay = await ethers.getContractFactory("TokenForPay" , owner);
+    TokenForPayy = await TokenForPay.deploy();
+    await TokenForPayy.deployed();
+    
+ });
 
-    expect(await greeter.greet()).to.equal("Hola, mundo!");
-  });
-});
+ 
+ it("MINT ERC20 TOKENS with price" , async function () {
+
+    let tokensMint = await TokenForPayy.buyToken(owner,) ;
+    expect(await erc20.connect(acc2).balanceOfTokens(acc2.address)).to.eq(1);
+    await tokensMint.wait();
+    
+  
+
+   });
