@@ -5,7 +5,6 @@ pragma solidity ^0.8.7;
 import "./MyNFT.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-
 contract Manager is MyNFT {
 
     uint256 public nftPrice = 3;
@@ -51,8 +50,6 @@ contract Manager is MyNFT {
     function randomNFT () private view returns (uint256) {
 
         uint256 randomTokenId;
-        randomTokenId = uint256(keccak256(abi.encodePacked(msg.sender, block.timestamp)));
-
         randomTokenId = uint256(keccak256(abi.encodePacked(msg.sender, block.timestamp)));
         randomTokenId = randomTokenId % tokenId.length;
         if(randomTokenId == 0) {randomTokenId + 1; return randomTokenId;}
