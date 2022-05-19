@@ -2,7 +2,8 @@
 
 pragma solidity ^0.8.7;
 
-import "./ERC20.sol";
+// import "./ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract TokenForPay is ERC20  { 
 
@@ -19,7 +20,7 @@ contract TokenForPay is ERC20  {
 
         uint256 tokenAmount;
         tokenAmount = msg.value / tokenPrice;
-        mintToken(recepient, tokenAmount);
+        _mint(recepient, tokenAmount);
         return true;
 
     }
