@@ -52,7 +52,7 @@ contract Manager is MyNFT {
         uint256 randomTokenId;
         randomTokenId = uint256(keccak256(abi.encodePacked(msg.sender, block.timestamp)));
         randomTokenId = randomTokenId % tokenId.length;
-        if(randomTokenId == 0) {randomTokenId + 1; return randomTokenId;}
+        if(randomTokenId == 0) {return randomTokenId + 1;}
         else{return randomTokenId;}
     }
 
@@ -86,11 +86,12 @@ contract Manager is MyNFT {
 
     }
 
-
+    // Check my balance into Manager
     function checkMyDeposit (address _owner) public view returns (uint256) {
         return _balanceOfDeposit[_owner];
     }
 
+    // Main function to take deposit tokens after 1 minutes
     function takeTokensByOwner (IERC20 erc20) public onlyOwner {
 
         require(block.timestamp >= endTime , "wait 1 minutes");
@@ -102,6 +103,7 @@ contract Manager is MyNFT {
 
     }
 
+    // Test function to take deposit tokens after 1 minutes
     function takeTokensByOwnerTest (IERC20 erc20) public onlyOwner {
 
         // require(block.timestamp >= endTime , "wait 1 minutes");

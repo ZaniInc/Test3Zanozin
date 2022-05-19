@@ -13,8 +13,8 @@ contract MyNFT is ERC721 {
 
         uint256 randomRarity;
         randomRarity = uint256(keccak256(abi.encodePacked(msg.sender, block.timestamp)));
-        randomRarity = randomRarity % 4;
-        if(randomRarity == 0) {randomRarity + 1; raritySet[tokenID] += randomRarity;}
+        randomRarity = randomRarity % 5;
+        if(randomRarity == 0) {raritySet[tokenID] = 1;}
         else{raritySet[tokenID] += randomRarity;}
         
         
