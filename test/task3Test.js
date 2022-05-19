@@ -51,7 +51,7 @@ let Managerr;
    });
 
    it("Try to take NFT main function must fail with require" , async function () {
-
+      
       let takeNFTT = await Managerr.connect(acc2).takeNFTMain();
       await takeNFTT.wait();
       // expect(await Managerr.connect(acc2).checkMyDeposit(acc2.address)).to.eq(3);
