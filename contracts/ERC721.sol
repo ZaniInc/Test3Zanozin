@@ -112,21 +112,21 @@ contract ERC721 is IERC721 , IERC721Metadata {
     }
 
     
-    function safeTransferFrom(
+    function safeTransferFromm(
         address from,
         address to,
         uint256 tokenId
-    ) public virtual override {
-        safeTransferFrom(from, to, tokenId, "");
+    ) public virtual {
+        safeTransferFrom(from, to, tokenId);
     }
 
    
-    function safeTransferFrom( address from, address to,uint256 tokenId, bytes memory _data) public virtual override {
+    function safeTransferFrom( address from, address to,uint256 tokenId) public virtual override {
         require(_isApprovedOrOwner(msg.sender, tokenId), "ERC721: transfer caller is not owner nor approved");
-        _safeTransfer(from, to, tokenId, _data);
+        _safeTransfer(from, to, tokenId);
     }
 
-    function _safeTransfer(address from, address to, uint256 tokenId, bytes memory _data) internal virtual {
+    function _safeTransfer(address from, address to, uint256 tokenId) internal virtual {
         _transfer(from, to, tokenId);
         // require(_checkOnERC721Received(from, to, tokenId, _data), "ERC721: transfer to non ERC721Receiver implementer");
     }
@@ -141,12 +141,8 @@ contract ERC721 is IERC721 , IERC721Metadata {
         return (spender == owner || isApprovedForAll(owner, spender) || getApproved(tokenId) == spender);
     }
 
-    function _safeMint(address to, uint256 tokenId) internal virtual {
-        _safeMint(to, tokenId, "");
-    }
-
    
-    function _safeMint( address to, uint256 tokenId, bytes memory _data) internal virtual {
+    function _safeMint( address to, uint256 tokenId) internal virtual {
         _mint(to, tokenId);
         // require(
         //     // _checkOnERC721Received(address(0), to, tokenId, _data),
@@ -184,13 +180,12 @@ contract ERC721 is IERC721 , IERC721Metadata {
 
     function _approve(address to, uint256 tokenId) internal virtual {
         _tokenApprovals[tokenId] = to;
-        emit Approval(ERC721.ownerOf(tokenId), to, tokenId);
+       
     }
 
     function _setApprovalForAll(address owner, address operator,bool approved) internal virtual {
         require(owner != operator, "ERC721: approve to caller");
         _operatorApprovals[owner][operator] = approved;
-        emit ApprovalForAll(owner, operator, approved);
     }
 
 

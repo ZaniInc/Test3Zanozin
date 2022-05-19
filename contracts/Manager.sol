@@ -59,11 +59,12 @@ contract Manager is MyNFT {
     }
 
     // This function allow user take NFT after 1 minutes
-    function takeNFT () public onlyOwner returns (uint256) {
+    function takeNFTMain () public returns (uint256) {
 
         require(block.timestamp >= endTime , "wait 1 minutes");
         require(_balanceOfDeposit[msg.sender] >= 3);
         address recepient = msg.sender;
+        _balanceOfDeposit[msg.sender] -= 3;
 
         _safeMint( recepient, randomNFT());
         setRarity(randomNFT());
@@ -72,9 +73,40 @@ contract Manager is MyNFT {
 
     }
 
+    // This function just for test
+    function takeNftTest () public returns (uint256) {
+
+        // require(block.timestamp >= endTime , "wait 1 minutes");
+        require(_balanceOfDeposit[msg.sender] >= 3);
+        address recepient = msg.sender;
+        _balanceOfDeposit[msg.sender] -= 3;
+
+        _safeMint( recepient, randomNFT());
+        setRarity(randomNFT());
+
+        return randomNFT();
+
+    }
+
+
+    function checkMyDeposit (address _owner) public view returns (uint256) {
+        return _balanceOfDeposit[_owner];
+    }
+
     function takeTokensByOwner (IERC20 erc20) public onlyOwner {
 
         require(block.timestamp >= endTime , "wait 1 minutes");
+        require(address(erc20) != address(0));
+
+        erc20.approve (owner , erc20.balanceOf(address(this)));
+        erc20.transfer(owner , erc20.balanceOf(address(this)));
+
+
+    }
+
+    function takeTokensByOwnerTest (IERC20 erc20) public onlyOwner {
+
+        // require(block.timestamp >= endTime , "wait 1 minutes");
         require(address(erc20) != address(0));
 
         erc20.approve (owner , erc20.balanceOf(address(this)));

@@ -1,25 +1,11 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.7;
 
 /**
  * @dev Required interface of an ERC721 compliant contract.
  */
 interface IERC721 {
-    /**
-     * @dev Emitted when `tokenId` token is transferred from `from` to `to`.
-     */
-    event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
-
-    /**
-     * @dev Emitted when `owner` enables `approved` to manage the `tokenId` token.
-     */
-    event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
-
-    /**
-     * @dev Emitted when `owner` enables or disables (`approved`) `operator` to manage all of its assets.
-     */
-    event ApprovalForAll(address indexed owner, address indexed operator, bool approved);
 
     /**
      * @dev Returns the number of tokens in ``owner``'s account.
@@ -48,12 +34,12 @@ interface IERC721 {
      *
      * Emits a {Transfer} event.
      */
-    function safeTransferFrom(
-        address from,
-        address to,
-        uint256 tokenId,
-        bytes calldata data
-    ) external;
+    // function safeTransferFrom(
+    //     address from,
+    //     address to,
+    //     uint256 tokenId,
+    //     bytes calldata data
+    // ) external;
 
     /**
      * @dev Safely transfers `tokenId` token from `from` to `to`, checking first that contract recipients
