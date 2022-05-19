@@ -64,13 +64,14 @@ let Managerr;
       let takeNFTTEST = await Managerr.connect(acc2).takeNftTest();
       await takeNFTTEST.wait();
       expect(await Managerr.connect(acc2).checkMyDeposit(acc2.address)).to.eq(0);
-      console.log("My random NFT :", await Managerr.connect(acc2).balanceOf(acc2.address));
+      console.log("My random rarity :", rarity);
+      console.log("My random NFT :", await Managerr.connect(acc2).nftOwner(acc2.address));
       
    });
    
    it("Check my rarity" , async function () {
 
-      let rarity = await Managerr.connect(acc2).myRarity(await Managerr.connect(acc2).balanceOf(acc2.address));
+      let rarity = await Managerr.myRarity(await Managerr.nftOwner(acc2.address));
       console.log("My random rarity :", rarity);
       
    });
