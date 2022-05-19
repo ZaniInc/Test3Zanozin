@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.7;
 
 import "./IERC721.sol";
 import "./IERC721Metadata.sol";
@@ -35,14 +35,6 @@ contract ERC721 is IERC721 , IERC721Metadata {
     }
 
    
-    // function supportsInterface(bytes4 interfaceId) public view virtual override(ERC165, IERC165) returns (bool) {
-    //     return
-    //         interfaceId == type(IERC721).interfaceId ||
-    //         interfaceId == type(IERC721Metadata).interfaceId ||
-    //         super.supportsInterface(interfaceId);
-    // }
-
-   
     function balanceOf(address owner) public view virtual override returns (uint256) {
         require(owner != address(0), "ERC721: balance query for the zero address");
         return _balances[owner];
@@ -75,7 +67,7 @@ contract ERC721 is IERC721 , IERC721Metadata {
 
     
     function _baseURI() internal view virtual returns (string memory) {
-        return "";
+        return "https://gateway.pinata.cloud/ipfs/QmeBykqdA6f2SMyDt5nnkXhaYrQPvNU6ojM9zSr81veRFe/";
     }
 
    
@@ -165,12 +157,10 @@ contract ERC721 is IERC721 , IERC721Metadata {
         require(to != address(0), "ERC721: mint to the zero address");
         require(!_exists(tokenId), "ERC721: token already minted");
 
-        
-
-        _balances[to] += 1;
+        _balances[to] += tokenId;
         _owners[tokenId] = to;
 
-        emit Transfer(address(0), to, tokenId);
+        // emit Transfer(address(0), to, tokenId);
 
     
     }
@@ -188,7 +178,6 @@ contract ERC721 is IERC721 , IERC721Metadata {
         _balances[to] += 1;
         _owners[tokenId] = to;
 
-        emit Transfer(from, to, tokenId);
 
         
     }

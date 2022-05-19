@@ -12,13 +12,24 @@ contract ERC20 is IERC20 {
 
     string private nameERC20;
     string private symbolERC20;
-    uint8 decimals = 18;
 
     uint256 private _totalSupply;
 
     constructor(string memory name_, string memory symbol_) {
         nameERC20 = name_;
         symbolERC20 = symbol_;
+    }
+
+    function name() public view virtual returns (string memory) {
+        return nameERC20;
+    }
+
+    function symbol() public view virtual returns (string memory) {
+        return symbolERC20;
+    }
+
+    function decimals() public view virtual returns (uint8) {
+        return 18;
     }
 
     function balanceOf (address owner)public view override returns(uint256){
@@ -31,7 +42,7 @@ contract ERC20 is IERC20 {
         return _totalSupply;
     }
 
-    function mintToken (address recepient , uint256 amount) public {
+    function mintToken (address recepient , uint256 amount) internal {
 
         require(recepient != address(0));
         require(amount != 0);
@@ -43,19 +54,19 @@ contract ERC20 is IERC20 {
 
         require(recepient != address(0));
         require(amount != 0);
-        require(_allowances[msg.sender][recepient] == amount);
+        require(_allowances[msg.sender][recepient] >= amount);
         _transfer(msg.sender, recepient, amount);
         return true;
 
     }
 
-    function transferFrom ( address from ,address recepient , uint256 amount) public override returns(bool) {
+    function transferFrom ( address from ,address to , uint256 amount) public override returns(bool) {
 
-        require(recepient != address(0) && from != address(0));
-        require(amount != 0);
-        require(_allowances[msg.sender][recepient] == amount);
+        require(from != address(0) && to != address(0) , "address == 0");
+        require(amount != 0 , "amount == 0");
+        require(_allowances[from][to] >= amount , "Not approve transfer");
 
-        _transfer(from, recepient, amount);
+        _transfer(from, to, amount);
         return true;
 
     }

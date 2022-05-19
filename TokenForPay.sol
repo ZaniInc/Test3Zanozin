@@ -6,14 +6,19 @@ import "./ERC20.sol";
 
 contract TokenForPay is ERC20  { 
 
-    uint256 public tokenPricee = 0.0001 ether;
+    uint256 public tokenPrice = 0.0001 ether;
 
     constructor() ERC20("TokenForPay", "TFP") {}
 
-    function buyToken(address recepient ,uint256 amount)public payable returns(bool) {
+    // Buy tokens by ether
+    function buyToken(address recepient)public payable returns(bool) {
+
+        require(recepient != address(0));
+        // 0.0001 = 100000000000000 ether
+        require(msg.value >= 0.0001 ether);
 
         uint256 tokenAmount;
-        tokenAmount = amount / tokenPricee;
+        tokenAmount = msg.value / tokenPrice;
         mintToken(recepient, tokenAmount);
         return true;
 
