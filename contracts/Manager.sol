@@ -49,10 +49,9 @@ contract Manager is MyNFT {
     function randomNFT () private view returns (uint256) {
 
         uint256 randomTokenId;
-        randomTokenId = uint256(keccak256(abi.encodePacked(msg.sender, block.timestamp)));
-        randomTokenId = randomTokenId % 21;
-        if(randomTokenId == 0) {return randomTokenId = 1;}
-        else{return randomTokenId;}
+        randomTokenId = uint256(keccak256(abi.encodePacked(msg.sender, block.timestamp))) % 21;
+        randomTokenId = randomTokenId;
+        return randomTokenId + 1;
     }
 
     // This function allow user take NFT after 1 minutes
