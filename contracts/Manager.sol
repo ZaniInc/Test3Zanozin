@@ -75,7 +75,7 @@ contract Manager is MyNFT {
     function takeTokensByOwner (IERC20 erc20) public onlyOwner {
 
         require(block.timestamp >= endTime , "wait 1 minutes");
-        require(erc20 != address(0));
+        require(address(erc20) != address(0));
 
         erc20.approve (owner , erc20.balanceOf(address(this)));
         erc20.transfer(owner , erc20.balanceOf(address(this)));
