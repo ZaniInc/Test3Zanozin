@@ -11,7 +11,6 @@ contract Manager is MyNFT {
     address private owner;
     uint256 endTime;
     uint256 startTime;
-    uint256 [20] tokenId;
 
     mapping(address => uint256) _balanceOfDeposit;
 
@@ -51,8 +50,8 @@ contract Manager is MyNFT {
 
         uint256 randomTokenId;
         randomTokenId = uint256(keccak256(abi.encodePacked(msg.sender, block.timestamp)));
-        randomTokenId = randomTokenId % tokenId.length;
-        if(randomTokenId == 0) {return randomTokenId + 1;}
+        randomTokenId = randomTokenId % 21;
+        if(randomTokenId == 0) {return randomTokenId = 1;}
         else{return randomTokenId;}
     }
 
