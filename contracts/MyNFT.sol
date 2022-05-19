@@ -8,6 +8,10 @@ contract MyNFT is ERC721 {
 
     mapping(uint256 => uint256)raritySet;
 
+    function _baseURI() internal pure override returns (string memory) {
+        return "link/";
+    }
+
     //Random pick rarity 1-4
     function setRarity (uint256 tokenID) internal {
 
