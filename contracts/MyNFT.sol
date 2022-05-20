@@ -8,11 +8,14 @@ contract MyNFT is ERC721 {
 
     mapping(uint256 => uint256)raritySet;
 
+    // Set token date control by contract Manager
+    mapping(uint256 => uint256) internal dateOfToken;
+
     function _baseURI() internal pure override returns (string memory) {
         return "link/";
     }
 
-    //Random pick rarity 1-4
+    //Random pick rarity 1-4 and set amount to raritySet mapping
     function setRarity (uint256 tokenID) internal {
 
         uint256 randomRarity;
@@ -23,7 +26,7 @@ contract MyNFT is ERC721 {
         else if (randomRarity == 9) { raritySet[tokenID] += 4;}
     }
 
-    // Just for test view function
+    // Just for test view function show token rarity
     function myRarity () public view returns (uint256 yourRarity) {
 
         for(uint256 a = 0 ; a < 21 ; a++){

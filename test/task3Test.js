@@ -75,6 +75,13 @@ let Managerr;
       
    });
 
+   it("Check token date" , async function () {
+
+      let date = await Managerr.nftDate();
+      console.log("token date :", date);
+      
+   });
+
    it("Take tokens by owner must fail with require" , async function () {
 
       let takeTokensMain = await Managerr.connect(owner).takeTokensByOwner(TokenForPayy.address);
