@@ -70,7 +70,7 @@ let Managerr;
    
    it("Check my rarity" , async function () {
 
-      let rarity = await Managerr.myRarity(await Managerr.nftOwner(acc2.address));
+      let rarity = await Managerr.myRarity();
       console.log("My random rarity :", rarity);
       
    });

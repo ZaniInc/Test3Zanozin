@@ -24,9 +24,13 @@ contract MyNFT is ERC721 {
     }
 
     // Just for test view function
-    function myRarity (uint256 tokenID) public view returns (uint256) {
+    function myRarity () public view returns (uint256 yourRarity) {
 
-        return raritySet[tokenID];
+        for(uint256 a = 0 ; a < 21 ; a++){
+
+        if(raritySet[a] >= 1) {return uint256(raritySet[a]);}
+    
+        }
     }
     
 }
