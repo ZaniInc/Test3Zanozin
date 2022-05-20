@@ -54,8 +54,6 @@ let Managerr;
       
       let takeNFTT = await Managerr.connect(acc2).takeNFTMain();
       await takeNFTT.wait();
-      // expect(await Managerr.connect(acc2).checkMyDeposit(acc2.address)).to.eq(3);
-      // console.log("My deposit :",await Managerr.connect(acc2).checkMyDeposit(acc2.address));
       
    });
 
@@ -64,21 +62,13 @@ let Managerr;
       let takeNFTTEST = await Managerr.connect(acc2).takeNftTest();
       await takeNFTTEST.wait();
       expect(await Managerr.connect(acc2).checkMyDeposit(acc2.address)).to.eq(0);
-      console.log("My random NFT :", await Managerr.connect(acc2).nftOwner(acc2.address));
-      
-   });
-   
-   it("Check my rarity" , async function () {
-
-      let rarity = await Managerr.myRarity();
-      console.log("My random rarity :", rarity);
       
    });
 
-   it("Check token date" , async function () {
+   it("Check my struct" , async function () {
 
-      let date = await Managerr.nftDate();
-      console.log("token date :", date);
+      let struct = await Managerr.callStruct(acc2.address);
+      console.log("My random struct :", struct);
       
    });
 
