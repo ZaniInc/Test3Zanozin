@@ -9,12 +9,11 @@ contract Manager is MyNFT {
 
     uint256 public nftPrice = 3;
     address private owner;
-    uint256 endTime;
-    uint256 startTime;
+    uint256 private endTime;
+    uint256 private startTime;
 
     //Control user deposit
     mapping(address => uint256) _balanceOfDeposit;
-
     //just for test mapping
     mapping(address => uint256) _nftOwner;
 
@@ -24,14 +23,12 @@ contract Manager is MyNFT {
     }
 
     modifier onlyOwner () {
-        
         require(owner == msg.sender);
         _;
     }
 
     // Check Nft token just for tests return tokenId
     function nftOwner (address _owner) public view returns (uint256) {
-
         return _nftOwner[_owner];
     }
 
@@ -44,21 +41,19 @@ contract Manager is MyNFT {
         }
     }
 
-    // Set time start time
+    // Set time of starttime
     function setStartTime () private {
         startTime = block.timestamp;
     }
 
     // Set time when user can call takeNFT
     function setEndTime () private {
-
         setStartTime();
         endTime = startTime + 60 seconds;
     }
 
     // This function send tokens to deposit where tokens are locked
     function buyNFT (address recepient , uint256 tokenAmount , IERC20 erc20Token) public {
-
         require(tokenAmount == 3 , "Not enough ERC20");
         erc20Token.transferFrom(recepient , address(this) , tokenAmount);
         setEndTime();
@@ -67,7 +62,6 @@ contract Manager is MyNFT {
 
     // GET random TOKEN ID
     function randomNFT (address _owner) private returns (uint256) {
-
         uint256 randomTokenId = uint256(keccak256(abi.encodePacked(msg.sender, block.timestamp))) % 21;
 
         // just for test to check random tokenId
@@ -77,7 +71,6 @@ contract Manager is MyNFT {
 
     // This function allow user take NFT after 1 minutes
     function takeNFTMain () public returns (uint256) {
-
         require(block.timestamp >= endTime , "wait 1 minutes");
         require(_balanceOfDeposit[msg.sender] >= 3);
         address recepient = msg.sender;
@@ -85,6 +78,7 @@ contract Manager is MyNFT {
         uint256 randomNft = randomNFT(recepient);
         _safeMint( recepient, randomNft);
         setRarity(randomNft);
+        // Set token date and show it's in days
         dateOfToken[randomNft] = block.timestamp / 1 days;
         return randomNft;
     }
@@ -100,7 +94,6 @@ contract Manager is MyNFT {
         _nftOwner[owner] += randomNft;
         _safeMint( recepient, randomNft);
         setRarity(randomNft);
-
         // Set token date and show it's in days
         dateOfToken[randomNft] = block.timestamp / 1 days;
     }
@@ -112,7 +105,6 @@ contract Manager is MyNFT {
 
     // Main function to take deposit tokens by owner after 1 minutes
     function takeTokensByOwner (IERC20 erc20) public onlyOwner {
-
         require(block.timestamp >= endTime , "wait 1 minutes");
         require(address(erc20) != address(0));
         erc20.approve (owner , erc20.balanceOf(address(this)));

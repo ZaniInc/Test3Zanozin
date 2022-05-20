@@ -18,8 +18,7 @@ contract MyNFT is ERC721 {
     //Random pick rarity 1-4 and set amount to raritySet mapping
     function setRarity (uint256 tokenID) internal {
 
-        uint256 randomRarity;
-        randomRarity = uint256(keccak256(abi.encodePacked(msg.sender, block.timestamp))) % 10;
+        uint256 randomRarity = uint256(keccak256(abi.encodePacked(msg.sender, block.timestamp))) % 10;
         if(randomRarity <= 3){raritySet[tokenID] += 1;}
         else if (randomRarity <= 6){raritySet[tokenID] += 2;}
         else if (randomRarity <=8){ raritySet[tokenID] += 3;}
