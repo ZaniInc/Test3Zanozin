@@ -12,14 +12,12 @@ contract TokenForPay is ERC20  {
 
     // Buy tokens by ether
     function buyToken(address recepient)public payable returns(bool) {
-
         require(recepient != address(0));
         // 0.0001 = 100000000000000 ether
         require(msg.value >= 0.0001 ether);
         uint256 tokenAmount = msg.value / tokenPrice;
         _mint(recepient, tokenAmount);
         return true;
-
     }
 
 
