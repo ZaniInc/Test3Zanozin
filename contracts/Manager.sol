@@ -62,6 +62,8 @@ contract Manager is MyNFT {
         nft.tokenId = randomNft;
         nft.date = block.timestamp / 1 days;
         nft.rarity = setRarity();
+
+        // Add nft to mapping
         _showMyNft[recepient] = nft;
     }
 
@@ -78,6 +80,8 @@ contract Manager is MyNFT {
         nft.tokenId = randomNft;
         nft.date = block.timestamp / 1 days;
         nft.rarity = setRarity();
+
+        // Add nft to mapping
         _showMyNft[recepient] = nft;
     }
 
